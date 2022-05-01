@@ -1,5 +1,7 @@
 package saha.code.spring_data_jpa.dao;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import saha.code.spring_data_jpa.domain.Author;
 import saha.code.spring_data_jpa.repositories.AuthorRepository;
@@ -15,6 +17,11 @@ public class AuthorDaoImpl implements AuthorDao {
 
     public AuthorDaoImpl(AuthorRepository authorRepository) {
         this.authorRepository = authorRepository;
+    }
+
+    @Override
+    public List<Author> findAllAuthorsByLastName(String lastName, Pageable pageable) {
+        return authorRepository.findAuthorByLastName(lastName,pageable).getContent();
     }
 
     @Override
